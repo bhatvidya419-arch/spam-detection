@@ -1,0 +1,35 @@
+import email
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+import os
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score, recall_score
+
+
+def parse_email(file_path):
+    """
+    Read each open in the directory & parse email info
+    Path: Variable used to define folder location
+    """
+    with open(file_path, 'rb') as f:
+        msg = email.message_from_bytes(f.read())
+        
+    #Get email headers
+    subject = msg.get('Subject')
+    
+    # Read email’s body
+    body = str(msg.get_payload())
+    
+    # Remove HTML tags
+    body = BeautifulSoup(body).get_text()
+    return subject, body
