@@ -15,7 +15,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score
 
-
 def parse_email(file_path):
     """
     Read each open in the directory & parse email info
